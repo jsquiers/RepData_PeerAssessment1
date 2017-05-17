@@ -56,7 +56,7 @@ For this part of the assignment, you can ignore the missing values in the datase
 1. Calculate the total number of steps taken per day  
 ```{r}
 #sum steps in each interval by day to determine total number of steps taken per day and store in dataframe stepsperday; ignore NA values
-stepsperday <- aggregate(activity$steps, by = list(activity$date), sum, na.rm=TRUE)
+stepsperday <- aggregate(activity$steps, by = list(activity$date), sum, na.rm=FALSE)
 
 #name columns in stepsperday dataframe with Date and steps (total number of steps)
 names(stepsperday) <- c("Date","steps")
@@ -71,11 +71,11 @@ qplot(steps, data=stepsperday, geom = "histogram", xlab = "Total Number of Steps
 3. Calculate and report the mean and median of the total number of steps taken per day
 ```{r}
 #report the mean total number of steps taken per day
-mean.steps <- mean(stepsperday$steps)
+mean.steps <- mean(stepsperday$steps, na.rm=TRUE)
 paste("The mean number of total steps per day is", mean.steps)
 
 #calculate and report median total number of steps taken per day
-median.steps <- median(stepsperday$steps)
+median.steps <- median(stepsperday$steps, na.rm=TRUE)
 paste("The median number of total steps per day is", median.steps)
 ```
 
@@ -142,7 +142,7 @@ paste("The median total number of steps taken per day is",round(median(totaldail
 ```
 
 (b) Do these values differ from the estimates from the first part of the assignment? What is the impace of imputing missing data on the estimates of the total daily number of steps?  
-By imputing missing values using the mean, the reported values for mean and median number of total daily steps both change. The mean increased from 9354 to 10766, and the median increased from 10395 to 10766. After imputation in this manner, the mean and median are the same.
+By imputing missing values using the mean, the reported mean and median values do not change.
 
 
 ##Are there differences in activity patterns between weekdays and weekends?
